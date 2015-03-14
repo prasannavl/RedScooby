@@ -1,0 +1,99 @@
+﻿<views:MainViewBase
+    x:Class="RedScooby.Views.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:RedScooby.Views"
+    xmlns:components="using:RedScooby.Views.Components"
+    xmlns:converters="using:RedScooby.Converters"
+    xmlns:assistance="using:RedScooby.Views.Assistance"
+    xmlns:settings="using:RedScooby.Views.Settings"
+    xmlns:circles="using:RedScooby.Views.Circles"
+    xmlns:around="using:RedScooby.Views.Around"
+    DataContext="{x:Null}"
+    mc:Ignorable="d">
+    <views:MainViewBase.Resources>
+        <Storyboard x:Name="ShowStatusStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="StatusPopOut">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
+                Storyboard.TargetName="StatusPopOut">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.001" Value="0" />
+                <EasingDoubleKeyFrame x:Name="StatusHolderOffsetter" KeyTime="0:0:0.2" Value="-220" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </views:MainViewBase.Resources>
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Popup VerticalOffset="5" x:Name="StatusPopOut" Opacity="0">
+            <Popup.RenderTransform>
+                <CompositeTransform />
+            </Popup.RenderTransform>
+            <Popup.Projection>
+                <PlaneProjection />
+            </Popup.Projection>
+            <Border CornerRadius="20, 0, 0, 20"
+                    Background="#AA434343"
+                    x:Name="StatusHolder"
+                    BorderThickness="0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Margin="0" Height="40" Width="220">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Viewbox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="40, 0, 20, 0">
+                        <TextBlock Text="No internet connection" Margin="0"
+                                   HorizontalAlignment="Center" VerticalAlignment="Top" />
+                    </Viewbox>
+                </Grid>
+            </Border>
+        </Popup>
+        <Pivot Grid.Row="0" x:Name="RootPivot"
+               Background="Black"
+               Title="{Binding Source={StaticResource ResourceComposition}, Path=FormattedStrings.AppTitleBold}"
+               Pivot.TitleTemplate="{StaticResource RootPivotTitleTemplate}"
+               Pivot.HeaderTemplate="{StaticResource RootPivotHeaderTemplate}">
+            <PivotItem x:Name="AssistPivotItem"
+                       Header="{Binding Source={StaticResource ResourceComposition}, Path=TabStrings.Assist}"
+                       Style="{StaticResource RootPivotItemStyle}">
+                <assistance:AssistView />
+            </PivotItem>
+            <PivotItem x:Name="AroundMePivotItem"
+                       Header="{Binding Source={StaticResource ResourceComposition}, Path=TabStrings.Around}"
+                       Style="{StaticResource RootPivotItemStyle}">
+                <components:DynamicTemplateView x:Name="AroundMeViewHolder" Visibility="Collapsed">
+                    <components:DynamicTemplateView.ActiveTemplate>
+                        <DataTemplate>
+                            <around:AroundMeView />
+                        </DataTemplate>
+                    </components:DynamicTemplateView.ActiveTemplate>
+                </components:DynamicTemplateView>
+            </PivotItem>
+            <PivotItem x:Name="SettingsPivotItem"
+                       Header="{Binding Source={StaticResource ResourceComposition}, Path=TabStrings.Settings}"
+                       Style="{StaticResource RootPivotItemStyle}">
+                <components:DynamicTemplateView x:Name="SettingsViewHolder" Visibility="Collapsed">
+                    <components:DynamicTemplateView.ActiveTemplate>
+                        <DataTemplate>
+                            <settings:SettingsView />
+                        </DataTemplate>
+                    </components:DynamicTemplateView.ActiveTemplate>
+                </components:DynamicTemplateView>
+            </PivotItem>
+            <PivotItem x:Name="CirclesPivotItem"
+                       Header="{Binding Source={StaticResource ResourceComposition}, Path=TabStrings.Circles}"
+                       Style="{StaticResource RootPivotItemStyle}">
+                <components:DynamicTemplateView x:Name="CirclesViewHolder" Visibility="Collapsed">
+                    <components:DynamicTemplateView.ActiveTemplate>
+                        <DataTemplate>
+                            <circles:CirclesView />
+                        </DataTemplate>
+                    </components:DynamicTemplateView.ActiveTemplate>
+                </components:DynamicTemplateView>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</views:MainViewBase>

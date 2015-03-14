@@ -1,0 +1,1 @@
+MainPackage=D:\Documents\Projects\RedScooby\src\RedScooby.WindowsPhone\bin\Release\RedScooby.WindowsPhone_1.1.0.4_Bundle\RedScooby.WindowsPhone_1.1.0.4_AnyCPU.appx

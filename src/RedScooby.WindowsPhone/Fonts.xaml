@@ -1,0 +1,20 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:RedScooby"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <FontFamily x:Key="FlatIcon">/Assets/fonts/flaticon.ttf#flaticon</FontFamily>
+    <FontFamily x:Key="SegoeIcon">Segoe UI Symbol</FontFamily>
+    <x:String x:Key="FlatIcon-Symbol-Heart">&#xE009;</x:String>
+    <x:String x:Key="FlatIcon-Symbol-FilledCircle">&#xE007;</x:String>
+    <x:String x:Key="FlatIcon-Symbol-Car">&#xE000;</x:String>
+    <x:String x:Key="FlatIcon-Symbol-Fire">&#xE008;</x:String>
+    <x:String x:Key="FlatIcon-Symbol-Contrast">&#xE003;</x:String>
+    <x:String x:Key="Segoe-Symbol-MiddleDot">&#x2e31;</x:String>
+    <x:String x:Key="Segoe-Symbol-DownArrow">&#x2193;</x:String>
+    <x:String x:Key="Segoe-Symbol-Rotate">&#xe14a;</x:String>
+    <x:String x:Key="Segoe-Symbol-BackToWindow">&#xe1d8;</x:String>
+
+</ResourceDictionary>

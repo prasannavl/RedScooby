@@ -1,0 +1,89 @@
+﻿<assistance:PinFeedbackViewBase
+    x:Class="RedScooby.Views.Assistance.PinFeedbackView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:RedScooby.Converters"
+    xmlns:viewModels="using:RedScooby.ViewModels"
+    xmlns:assistance="using:RedScooby.Views.Assistance"
+    xmlns:assistance1="using:RedScooby.ViewModels.Assistance"
+    mc:Ignorable="d"
+    d:DesignHeight="480"
+    d:DesignWidth="400"
+    x:Name="View"
+    DataContext="{x:Null}"
+
+    d:DataContext="{d:DesignInstance assistance1:PinFeedbackViewModel}">
+    <assistance:PinFeedbackViewBase.Resources>
+        <converters:StringToSecretConverter x:Key="StringToSecretConverter" />
+    </assistance:PinFeedbackViewBase.Resources>
+    <Grid x:Name="LayoutRoot" Background="#FF2C2C2C" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.Projection>
+            <PlaneProjection />
+        </Grid.Projection>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150*" />
+            <RowDefinition Height="100*" />
+            <RowDefinition Height="450*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Margin="20, 25, 20, 0" HorizontalAlignment="Stretch"
+                   FontWeight="Normal"
+                   TextWrapping="Wrap"
+                   TextAlignment="Left"
+                   FontSize="{Binding Source={RelativeSource Self}, Converter={StaticResource ScaleConverter}, ConverterParameter=10}"
+                   Text="{Binding FeedbackInfoText}" />
+        <TextBlock Grid.Row="1"
+                   Margin="0, 0, 0, 0" x:Name="PinCodeBlock" TextWrapping="Wrap" VerticalAlignment="Center"
+                   FontSize="{Binding Source={RelativeSource Self}, Converter={StaticResource ScaleConverter}, ConverterParameter=10}"
+                   Text="{Binding EnteredPinCode, Converter={StaticResource StringToSecretConverter}}"
+                   FontFamily="{StaticResource FlatIcon}"
+                   HorizontalAlignment="Center" />
+        <Grid Grid.Row="2" Margin="1, 0, 0, 0" HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Content="1" Grid.Row="0" Grid.Column="0" Style="{StaticResource PinFeedbackButtonStyle}"
+                    Click="OnNumericKey" />
+            <Button Content="2" Grid.Row="0" Grid.Column="1" Style="{StaticResource PinFeedbackButtonStyle}"
+                    Click="OnNumericKey" />
+            <Button Content="3" Grid.Row="0" Grid.Column="2" Style="{StaticResource PinFeedbackButtonStyle}"
+                    Click="OnNumericKey" />
+            <Button Content="4" Grid.Row="1" Grid.Column="0" Style="{StaticResource PinFeedbackButtonStyle}"
+                    Click="OnNumericKey" />
+            <Button Content="5" Grid.Row="1" Grid.Column="1" Style="{StaticResource PinFeedbackButtonStyle}"
+                    Click="OnNumericKey" />
+            <Button Content="6" Grid.Row="1" Grid.Column="2" Style="{StaticResource PinFeedbackButtonStyle}"
+                    Click="OnNumericKey" />
+            <Button Content="7" Grid.Row="2" Grid.Column="0" Style="{StaticResource PinFeedbackButtonStyle}"
+                    Click="OnNumericKey" />
+            <Button Content="8" Grid.Row="2" Grid.Column="1" Style="{StaticResource PinFeedbackButtonStyle}"
+                    Click="OnNumericKey" />
+            <Button Content="9" Grid.Row="2" Grid.Column="2" Style="{StaticResource PinFeedbackButtonStyle}"
+                    Click="OnNumericKey" />
+
+            <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource PinFeedbackButtonStyle}"
+                    Command="{Binding LeftButtonCommand}" Foreground="Tomato" FontSize="21"
+                    VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="SemiBold"
+                    FontStretch="Condensed" Content="SOS" />
+            <Button Content="0" Grid.Row="3" Grid.Column="1" Style="{StaticResource PinFeedbackButtonStyle}"
+                    Click="OnNumericKey" />
+            <Button Grid.Row="3" Grid.Column="2" Command="{Binding BackspaceCommand}"
+                    Style="{StaticResource PinFeedbackButtonStyle}">
+                <Path
+                    Data="M 160.00,384.00L0.00,224.00l 160.00-160.00l 352.00,0.00 L 512.00,384.00 L 160.00,384.00 z M 480.00,96.00L 173.255,96.00 l-128.00,128.00l 128.00,128.00L 480.00,352.00 L 480.00,96.00 zM 288.00,128.00L 352.00,192.00L 416.00,128.00L 448.00,160.00L 384.00,224.00L 448.00,288.00L 416.00,320.00L 352.00,256.00L 288.00,320.00L 256.00,288.00L 320.00,224.00L 256.00,160.00 z"
+                    Stretch="Uniform" Fill="#FFF4F4F5" Height="20" UseLayoutRounding="False" Width="30" />
+            </Button>
+        </Grid>
+
+    </Grid>
+</assistance:PinFeedbackViewBase>

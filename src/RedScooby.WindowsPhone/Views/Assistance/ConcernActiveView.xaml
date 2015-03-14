@@ -1,0 +1,126 @@
+﻿<assistance:ConcernActiveViewBase
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:assistance="using:RedScooby.Views.Assistance"
+    xmlns:vm="using:RedScooby.ViewModels.Assistance"
+    xmlns:converters="using:RedScooby.Converters"
+    x:Class="RedScooby.Views.Assistance.ConcernActiveView"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="300" d:DesignWidth="300"
+    x:Name="View"
+    DataContext="{x:Null}"
+    d:DataContext="{d:DesignInstance vm:ConcernActiveViewModel}">
+    <assistance:ConcernActiveViewBase.Resources>
+        <converters:TextBlockAnimatingConverter x:Key="TextBlockAnimatingConverter" />
+        <MenuFlyout x:Key="NotificationTargetsFlyout" Opened="NotificationTargetsFlyout_OnOpened" Placement="Bottom">
+            <!-- Menu flyout doesn't support binding to item source, so do it manually for now -->
+            <MenuFlyout.MenuFlyoutPresenterStyle>
+                <Style TargetType="MenuFlyoutPresenter">
+                    <Setter Property="FontSize" Value="17" />
+                </Style>
+            </MenuFlyout.MenuFlyoutPresenterStyle>
+            <MenuFlyoutItem Text="{Binding NotificationOptions[0].OptionDescription}"
+                            Tag="{Binding NotificationOptions[0]}" />
+            <MenuFlyoutItem Text="{Binding NotificationOptions[1].OptionDescription}"
+                            Tag="{Binding NotificationOptions[1]}" />
+            <MenuFlyoutItem Text="{Binding NotificationOptions[2].OptionDescription}"
+                            Tag="{Binding NotificationOptions[2]}" />
+            <MenuFlyoutItem Text="{Binding NotificationOptions[3].OptionDescription}"
+                            Tag="{Binding NotificationOptions[3]}" />
+            <MenuFlyoutItem Text="{Binding NotificationOptions[4].OptionDescription}"
+                            Tag="{Binding NotificationOptions[4]}" />
+        </MenuFlyout>
+    </assistance:ConcernActiveViewBase.Resources>
+    <Grid Background="#FF4F82D5" x:Name="LayoutRoot" Margin="0" VerticalAlignment="Stretch"
+          HorizontalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Grid.Projection>
+            <PlaneProjection />
+        </Grid.Projection>
+
+        <Grid Grid.Row="0" Grid.Column="0" x:Name="TimerGrid"
+              Height="{Binding Source={RelativeSource Self}, Converter={StaticResource ScaleConverter}, ConverterParameter=48.5}"
+              Grid.ColumnSpan="2"
+              VerticalAlignment="Top" Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="7" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border Tapped="TimerFeedbackRenew_OnTapped" BorderBrush="Transparent" BorderThickness="0"
+                    HorizontalAlignment="Left"
+                    Width="{Binding Source={RelativeSource Self}, Converter={StaticResource ScaleConverter}, ConverterParameter=39}"
+                    Margin="5,10,0,10">
+                <Border.Background>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/images/timer.png" />
+                </Border.Background>
+            </Border>
+            <TextBlock Grid.Row="0" x:Name="TimerTextBlock" TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right" Margin="0,20,20,20" Grid.Column="1" Padding="0"
+                       FontSize="{Binding Source={RelativeSource Self}, Converter={StaticResource ScaleConverter}, ConverterParameter=23.3}"
+                       Tapped="TimerTextBlock_OnTapped">
+                <TextBlock.Inlines>
+                    <Run Text="{Binding TimeLeftForNextPromptString, Mode=OneWay}" />
+                </TextBlock.Inlines>
+            </TextBlock>
+            <ProgressBar Grid.Row="1" x:Name="TimeLeftProgressBar" Grid.Column="0" Grid.ColumnSpan="2"
+                         Value="{Binding TimerProgressValue, Mode=OneWay}" Foreground="White"
+                         Background="#19FFFFFF" Margin="20,0" Height="7"
+                         BorderThickness="0" RenderTransformOrigin="0.5,0.5" />
+        </Grid>
+
+        <Grid x:Name="InfoGrid" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" x:Name="ConcernModeInfoTextBlock" TextWrapping="Wrap"
+                       Text="{Binding InfoText, Converter={StaticResource TextBlockAnimatingConverter}}"
+                       Margin="0,10,0,0"
+                       FontSize="{Binding Source={RelativeSource Self}, Converter={StaticResource ScaleConverter}, ConverterParameter=9}"
+                       FontFamily="Segoe WP" FontWeight="SemiLight" />
+            <Grid Grid.Row="1" x:Name="AddressPanel" Margin="0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="50" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" x:Name="AddressTextBlock" TextWrapping="Wrap"
+                           Text="{Binding Address, Mode=OneWay}"
+                           FontFamily="Segoe WP" Margin="0,0,5,0" HorizontalAlignment="Left"
+                           VerticalAlignment="Center" TextTrimming="WordEllipsis"
+                           FontSize="{Binding Source={RelativeSource Self}, Converter={StaticResource ScaleConverter}, ConverterParameter=8}"
+                           FontWeight="SemiBold" />
+                <Border Grid.Column="1" BorderBrush="Black"
+                        VerticalAlignment="Center"
+                        BorderThickness="0" Height="35" Width="35">
+                    <Border.Background>
+                        <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/images/location.active.png" />
+                    </Border.Background>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <Button x:Name="ConcernNotifyButton" Content="Who's notified?" Grid.Row="2" Grid.Column="0"
+                Background="#FF82ABEF" FontWeight="Normal" Style="{StaticResource BorderlessButtonStyle}" Margin="0"
+                VerticalAlignment="Stretch" FontSize="17.333" Flyout="{StaticResource NotificationTargetsFlyout}" />
+        <Button x:Name="ConcernOffButton" Content="I'm safe now" Grid.Row="2"
+                Grid.Column="1" Background="#FF1BB661" Command="{Binding EndConcernAsyncCommand}" FontWeight="Normal"
+                Style="{StaticResource BorderlessButtonStyle}" Margin="0" VerticalAlignment="Stretch" FontSize="17.333" />
+    </Grid>
+</assistance:ConcernActiveViewBase>

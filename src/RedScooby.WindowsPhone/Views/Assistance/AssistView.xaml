@@ -1,0 +1,254 @@
+﻿<assistance:AssistViewBase
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:components="using:RedScooby.Views.Components"
+    xmlns:viewModels="using:RedScooby.ViewModels"
+    xmlns:views="using:RedScooby.Views"
+    xmlns:assistance="using:RedScooby.Views.Assistance"
+    xmlns:assistance1="using:RedScooby.ViewModels.Assistance"
+    x:Class="RedScooby.Views.Assistance.AssistView"
+    mc:Ignorable="d"
+    d:DesignHeight="500" d:DesignWidth="400"
+    DataContext="{x:Null}"
+    d:DataContext="{d:DesignInstance assistance1:AssistanceViewModel}">
+    <assistance:AssistViewBase.Resources>
+        <Storyboard x:Name="PinFeedbackStoryboard">
+            <DoubleAnimation Duration="0:0:0.25" From="1" To="0" Storyboard.TargetProperty="(UIElement.Opacity)"
+                             Storyboard.TargetName="ConcernViewRegion" />
+            <DoubleAnimation Duration="0:0:0.25" From="1" To="0" Storyboard.TargetProperty="(UIElement.Opacity)"
+                             Storyboard.TargetName="DistressViewRegion" />
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="DistressActiveViewHolder">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0" />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="PinFeedbackViewHolder">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.05" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                           Storyboard.TargetName="ConcernViewRegion">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.25">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                           Storyboard.TargetName="DistressViewRegion">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.25">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                           Storyboard.TargetName="DistressActiveViewHolder">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.25">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                           Storyboard.TargetName="PinFeedbackViewHolder">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.25">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.LocalOffsetY)"
+                Storyboard.TargetName="PinFeedbackViewHolder">
+                <EasingDoubleKeyFrame KeyTime="0" Value="{Binding ActualHeight, ElementName=LayoutRoot}" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="DistressStoryboard">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                           Storyboard.TargetName="DistressActiveViewHolder">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.133">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.267">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                           Storyboard.TargetName="ControlsViewRegion">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.133">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="DistressActiveViewHolder">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.133" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.267" Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+                Storyboard.TargetName="DistressActiveViewHolder">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.133" Value="0.66" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.267" Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+                Storyboard.TargetName="DistressActiveViewHolder">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.133" Value="0.66" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.267" Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.SkewX)"
+                Storyboard.TargetName="DistressActiveViewHolder">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.133" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.267" Value="0" />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+                Storyboard.TargetName="ControlsViewRegion">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.133" Value="0.66" />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+                Storyboard.TargetName="ControlsViewRegion">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.133" Value="0.66" />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)"
+                Storyboard.TargetName="ControlsViewRegion">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.133" Value="90" />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)"
+                Storyboard.TargetName="DistressActiveViewHolder">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.133" Value="-90" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.267" Value="0" />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="ControlsViewRegion">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.133" Value="0" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </assistance:AssistViewBase.Resources>
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <components:DynamicTemplateView x:Name="DistressActiveViewHolder" Grid.Row="0" Visibility="Collapsed"
+                                        RenderTransformOrigin="0.5,0.5" Opacity="0.995">
+            <components:DynamicTemplateView.ActiveTemplate>
+                <DataTemplate>
+                    <assistance:DistressActiveView />
+                </DataTemplate>
+            </components:DynamicTemplateView.ActiveTemplate>
+            <components:DynamicTemplateView.RenderTransform>
+                <CompositeTransform />
+            </components:DynamicTemplateView.RenderTransform>
+            <components:DynamicTemplateView.Projection>
+                <PlaneProjection />
+            </components:DynamicTemplateView.Projection>
+        </components:DynamicTemplateView>
+        <components:DynamicTemplateView x:Name="PinFeedbackViewHolder" Grid.Row="0" Visibility="Collapsed">
+            <components:DynamicTemplateView.ActiveTemplate>
+                <DataTemplate>
+                    <assistance:PinFeedbackView />
+                </DataTemplate>
+            </components:DynamicTemplateView.ActiveTemplate>
+            <components:DynamicTemplateView.Projection>
+                <PlaneProjection />
+            </components:DynamicTemplateView.Projection>
+        </components:DynamicTemplateView>
+        <Grid x:Name="ControlsViewRegion" Grid.Row="0" RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <CompositeTransform />
+            </Grid.RenderTransform>
+            <Grid.Projection>
+                <PlaneProjection />
+            </Grid.Projection>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <assistance:ConcernControlView x:Name="ConcernViewRegion" Grid.Row="0" Margin="0">
+                <assistance:ConcernControlView.Projection>
+                    <PlaneProjection />
+                </assistance:ConcernControlView.Projection>
+            </assistance:ConcernControlView>
+            <assistance:DistressControlView x:Name="DistressViewRegion" Holding="DistressViewRegion_OnHolding"
+                                            PointerReleased="DistressViewRegion_OnPointerReleased"
+                                            IsHoldingEnabled="True"
+                                            PointerCanceled="DistressViewRegion_OnPointerReleased"
+                                            PointerCaptureLost="DistressViewRegion_OnPointerReleased"
+                                            ManipulationMode="System" Grid.Row="1" Margin="0, 5, 0, 0">
+                <assistance:DistressControlView.Projection>
+                    <PlaneProjection />
+                </assistance:DistressControlView.Projection>
+            </assistance:DistressControlView>
+        </Grid>
+        <Grid Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0, 5, 0, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="SirenButton" Margin="0, 0, 2, 0" Content="{Binding SirenSwitchText}"
+                    Command="{Binding ToggleSirenAsyncCommand}"
+                    Background="#FF474747" FontWeight="Normal" HorizontalAlignment="Stretch"
+                    Foreground="{StaticResource WhiteBrush}" Grid.Column="0"
+                    Style="{StaticResource BorderlessFlatButtonStyle}" />
+            <Button x:Name="FlashlightButton" Margin="1, 0, 0, 0" Content="{Binding FlashlightSwitchText}"
+                    Background="#FF474747"
+                    Foreground="{StaticResource WhiteBrush}" Command="{Binding ToggleFlashlightAsyncCommand}"
+                    FontWeight="Normal"
+                    HorizontalAlignment="Stretch"
+                    Grid.Column="1"
+                    Style="{StaticResource BorderlessFlatButtonStyle}" />
+        </Grid>
+    </Grid>
+</assistance:AssistViewBase>

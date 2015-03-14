@@ -1,0 +1,29 @@
+﻿<core:UserControlView x:Class="RedScooby.Views.DevView"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+                      xmlns:system="clr-namespace:System;assembly=mscorlib"
+                      xmlns:core="using:RedScooby.Views.Core"
+                      mc:Ignorable="d"
+                      FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                      Foreground="{StaticResource PhoneForegroundBrush}"
+                      d:DesignHeight="480" d:DesignWidth="480">
+    <Grid x:Name="LayoutRoot" Margin="10, 0, 10, 5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="1" BorderBrush="{StaticResource SubtleWhiteBrush}" BorderThickness="0">
+            <ScrollViewer>
+                <TextBlock FontSize="16" TextWrapping="Wrap" x:Name="LogTextBlock" Margin="10, 0, 10, 5" />
+            </ScrollViewer>
+        </Border>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Content="Clear" x:Name="ClearButton" />
+            <Button Content="Send" x:Name="SendButton" />
+        </StackPanel>
+    </Grid>
+</core:UserControlView>

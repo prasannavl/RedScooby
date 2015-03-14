@@ -194,4 +194,5 @@ ModelManifest.xml
 assets/[Pp]rotected/
 lib/[Pp]rotected/
 tools/[Pp]rotected/
-src/RedScooby.WindowsPhone/Protected
+src/RedScooby.WindowsPhone/Protected/
+
